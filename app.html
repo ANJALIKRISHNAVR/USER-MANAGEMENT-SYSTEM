@@ -1,0 +1,73 @@
+<nav class="navbar">
+    <div class="logo">User Management Application</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#contact ">Contact</a></li>
+      <li><a href="#about us">About us</a></li>
+    </ul>
+  </nav>
+<div class="main-div">
+  
+  <table class="tabl">
+  <div class="tab" (click)="showTabOneContent()" [ngClass]="{'selected' : tabNumber==1}">
+    Add User
+  </div>
+  <div class="tab" (click)="showTabTwoContent()" [ngClass]="{'selected ': tabNumber==2}">
+    List Users
+  </div>
+  <div class="content-area">
+    <div class="tab1-content" *ngIf ="tabNumber === 1">
+      <div class="user-add-area">
+        <br><br>
+      <table>
+       
+        <tr>
+          <td>Name</td>
+          <td><input type="string" [(ngModel)] = "userName"/></td>
+        </tr>
+          <tr>
+          <td>Mark</td>
+          <td><input type="number" [(ngModel)] = "mark"/></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <button class="clear" (click)="clearUserNameAndMark()">Clear</button>
+            <button class="submit" (click)="storeUserNameAndMarks()">Submit</button>
+          </td>
+        </tr>
+        
+      </table>
+      </div>
+    </div>
+    <div class="tab2-content" *ngIf ="tabNumber == 2">
+      
+      <br><br>
+      <div class="avg">
+        Average Mark: {{averageMark}}
+      </div>
+      <br>
+      <table>
+        <tr>
+          <th>Si No</th>
+          <th>Name</th>
+          <th>Mark</th>
+          <th>Action</th>
+        </tr>
+        <tr *ngFor="let name of names;let i=index" [ngClass]="{'odd': i%2==1, 'even': i%2==0}">
+          <td>{{i+1}}</td>
+          <td>{{ name }}</td>
+          <td [ngClass]="{'failed': (marks[i]<20), 'success':(marks[i]>=45)}">{{marks[i]}}</td>
+          <td>
+            <img (click)=deleteUser(i) class="imgstyle" src="https://cdn-icons-png.flaticon.com/256/6861/6861362.png"/>
+          </td>
+        </tr>
+      </table>
+      
+    </div>
+    
+  </div>
+  </table>
+
+
+
